@@ -87,6 +87,62 @@ export default function Home() {
             </motion.div>
           ))}
         </div>
+
+        {/* Testimonials Section */}
+        <section className="mt-60 mb-40">
+          <div className="text-center mb-24">
+            <h2 className="text-xs font-black uppercase tracking-[0.4em] text-zinc-400 mb-6">Voices of the Manor</h2>
+            <h3 className="text-6xl font-black tracking-tightest leading-none">Praise from the <br /> <span className="text-sky-blue">Elite.</span></h3>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                quote: "Host Manor has completely redefined how we manage our global academic olympiads. The precision and aesthetic are unmatched.",
+                author: "Dr. Elena Vane",
+                role: "Dean of Admissions",
+                org: "Stanford University",
+                avatar: "https://i.pravatar.cc/150?u=elena"
+              },
+              {
+                quote: "The discovery feed found us the perfect participants for our HR summit. It's more than a platform; it's a prestige network.",
+                author: "Marcus Thorne",
+                role: "Chief People Officer",
+                org: "Nexus Global",
+                avatar: "https://i.pravatar.cc/150?u=marcus"
+              },
+              {
+                quote: "Participating in events through Host Manor feels different. You aren't just an entry; you are part of a curated digital estate.",
+                author: "Sana Kim",
+                role: "Full Stack Engineer",
+                org: "Independent Participant",
+                avatar: "https://i.pravatar.cc/150?u=sana"
+              }
+            ].map((t, i) => (
+              <motion.div 
+                key={i}
+                whileHover={{ y: -5 }}
+                className="bg-zinc-50 p-12 rounded-[3rem] border border-transparent hover:border-sky-blue/20 hover:bg-white transition-all duration-500"
+              >
+                <div className="flex gap-1 mb-8">
+                  {[1, 2, 3, 4, 5].map(s => <Sparkles key={s} size={12} className="text-sky-blue" />)}
+                </div>
+                <p className="text-xl font-medium text-zinc-600 leading-relaxed mb-12 italic">
+                  "{t.quote}"
+                </p>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-zinc-200 rounded-2xl overflow-hidden grayscale">
+                    <img src={t.avatar} alt={t.author} className="w-full h-full object-cover" />
+                  </div>
+                  <div>
+                    <h4 className="font-black text-sm tracking-tight">{t.author}</h4>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">{t.role} • {t.org}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </section>
       </main>
 
       <footer className="max-w-7xl mx-auto px-6 py-20 border-t border-zinc-100 text-zinc-400 font-medium text-sm">
