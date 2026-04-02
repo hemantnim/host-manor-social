@@ -145,13 +145,59 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="max-w-7xl mx-auto px-6 py-20 border-t border-zinc-100 text-zinc-400 font-medium text-sm">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-          <p>© 2026 Host Manor Digital Estate. All rights reserved.</p>
-          <div className="flex gap-12 text-[10px] font-black uppercase tracking-widest">
-            <a href="#" className="hover:text-sky-blue transition-colors">GitHub</a>
-            <a href="#" className="hover:text-sky-blue transition-colors">Twitter</a>
-            <a href="#" className="hover:text-sky-blue transition-colors">Terms</a>
+      <footer className="bg-zinc-50 pt-32 pb-20 border-t border-zinc-100 mt-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-24">
+            <div className="space-y-8">
+              <div className="flex items-center gap-2">
+                <div className="w-6 h-6 bg-black rounded flex items-center justify-center">
+                  <div className="w-3 h-3 bg-sky-blue rounded-sm rotate-45" />
+                </div>
+                <div className="text-xl font-black tracking-tighter">Host Manor.</div>
+              </div>
+              <p className="text-zinc-400 font-medium leading-relaxed">
+                The most elite social ecosystem for institutional event hosting and discovery. Establishing the future of digital estates.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-black mb-8">The Estate</h4>
+              <ul className="space-y-4 text-sm font-bold text-zinc-400 uppercase tracking-widest">
+                <li><Link href="/explore" className="hover:text-sky-blue transition-colors">Explore Feed</Link></li>
+                <li><Link href="/organizations" className="hover:text-sky-blue transition-colors">Estates Directory</Link></li>
+                <li><Link href="/host/create" className="hover:text-sky-blue transition-colors">Host an Event</Link></li>
+                <li><Link href="/search" className="hover:text-sky-blue transition-colors">Intelligence Search</Link></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-black mb-8">Institution</h4>
+              <ul className="space-y-4 text-sm font-bold text-zinc-400 uppercase tracking-widest">
+                <li><Link href="/about" className="hover:text-sky-blue transition-colors">Our Narrative</Link></li>
+                <li><Link href="/careers" className="hover:text-sky-blue transition-colors">Join the Team</Link></li>
+                <li><Link href="/press" className="hover:text-sky-blue transition-colors">Press Estate</Link></li>
+                <li><Link href="/contact" className="hover:text-sky-blue transition-colors">Support Portal</Link></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-black mb-8">Legal & Privacy</h4>
+              <ul className="space-y-4 text-sm font-bold text-zinc-400 uppercase tracking-widest">
+                <li><Link href="/terms" className="hover:text-sky-blue transition-colors">Terms of Estate</Link></li>
+                <li><Link href="/privacy" className="hover:text-sky-blue transition-colors">Privacy Protocol</Link></li>
+                <li><Link href="/cookies" className="hover:text-sky-blue transition-colors">Cookie Policy</Link></li>
+                <li><Link href="/security" className="hover:text-sky-blue transition-colors">Verified Security</Link></li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="flex flex-col md:flex-row justify-between items-center pt-12 border-t border-zinc-200/50 text-zinc-400 font-bold text-[10px] uppercase tracking-[0.2em]">
+            <p>© 2026 Host Manor Digital Estate. All rights reserved.</p>
+            <div className="flex gap-12 mt-8 md:mt-0">
+              <a href="#" className="hover:text-black transition-colors">GitHub</a>
+              <a href="#" className="hover:text-black transition-colors">Twitter</a>
+              <a href="#" className="hover:text-black transition-colors">LinkedIn</a>
+            </div>
           </div>
         </div>
       </footer>
