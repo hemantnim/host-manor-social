@@ -60,7 +60,7 @@ export const Header = () => {
         )}
 
         <div className="flex items-center gap-4">
-          {!isAuthPage ? (
+          {!isAuthPage && (
             <>
               <Link 
                 href="/auth/login" 
@@ -72,10 +72,6 @@ export const Header = () => {
                 <Plus size={14} /> Establish Estate
               </Link>
             </>
-          ) : (
-            <Link href="/" className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 hover:text-black flex items-center gap-2 transition-all">
-              <LogIn size={14} className="rotate-180" /> Back to Home
-            </Link>
           )}
         </div>
       </div>
