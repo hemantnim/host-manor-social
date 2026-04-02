@@ -12,7 +12,8 @@ import {
   Trophy,
   ArrowUpRight,
   Filter,
-  Activity
+  Activity,
+  Sparkles
 } from "lucide-react";
 import Link from "next/link";
 
@@ -62,44 +63,36 @@ export default function IndividualDashboard() {
     <div className="min-h-screen bg-white flex">
       {/* Sidebar - Personal Stats */}
       <aside className="w-96 bg-zinc-50 border-r border-zinc-100 p-12 hidden lg:flex flex-col fixed h-screen overflow-y-auto">
-        <Link href="/" className="text-2xl font-black tracking-tighter mb-16 italic">HM.</Link>
+        <div className="flex items-center gap-2 mb-16">
+          <div className="w-6 h-6 bg-black rounded flex items-center justify-center">
+            <div className="w-3 h-3 bg-sky-blue rounded-sm rotate-45" />
+          </div>
+          <div className="text-xl font-black tracking-tighter">HM.</div>
+        </div>
         
         <div className="space-y-12">
           <div className="flex flex-col items-center text-center">
-            <div className="w-24 h-24 bg-zinc-200 rounded-3xl mb-6 flex items-center justify-center">
+            <div className="w-24 h-24 bg-sky-blue rounded-[2rem] mb-6 flex items-center justify-center text-white shadow-xl shadow-sky-blue/20">
               <span className="text-3xl font-black">HN</span>
             </div>
             <h2 className="text-2xl font-black tracking-tight mb-1">Hemant Nim</h2>
-            <p className="text-xs font-bold uppercase tracking-widest text-zinc-400">Individual Participant</p>
+            <p className="text-[10px] font-black uppercase tracking-widest text-sky-blue">Estate Gold Member</p>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            <div className="bg-white p-6 rounded-2xl border border-zinc-100 shadow-sm">
-              <p className="text-2xl font-black tracking-tighter">12</p>
-              <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Attended</p>
+            <div className="bg-white p-6 rounded-[1.5rem] border border-zinc-100 shadow-sm">
+              <p className="text-2xl font-black tracking-tighter text-sky-blue">12</p>
+              <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Events</p>
             </div>
-            <div className="bg-white p-6 rounded-2xl border border-zinc-100 shadow-sm">
+            <div className="bg-white p-6 rounded-[1.5rem] border border-zinc-100 shadow-sm">
               <p className="text-2xl font-black tracking-tighter">4</p>
-              <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Victories</p>
-            </div>
-          </div>
-
-          <div>
-            <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400 mb-6 flex items-center gap-2">
-              <Star size={12} className="text-black" /> My Interests
-            </h4>
-            <div className="flex flex-wrap gap-2">
-              {['Tech', 'Education', 'Hackathons', 'Design', 'Music'].map(tag => (
-                <span key={tag} className="bg-white border border-zinc-100 px-4 py-2 rounded-full text-xs font-bold text-zinc-600">
-                  {tag}
-                </span>
-              ))}
+              <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Wins</p>
             </div>
           </div>
 
           <div className="pt-8 border-t border-zinc-100">
-            <Link href="/explore" className="btn-primary w-full flex items-center justify-center gap-2 py-4">
-              <Plus size={20} /> Join New Events
+            <Link href="/explore" className="btn-sky w-full flex items-center justify-center gap-2 py-4 rounded-2xl">
+              <Plus size={20} /> Discover Estates
             </Link>
           </div>
         </div>
@@ -111,21 +104,18 @@ export default function IndividualDashboard() {
           {/* Dashboard Header */}
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-16">
             <div>
-              <h1 className="text-6xl font-black tracking-tightest leading-none mb-4 uppercase text-sm font-bold tracking-[0.3em] text-zinc-400">Overview</h1>
-              <h2 className="text-7xl font-black tracking-tighter leading-none">Your Estate.</h2>
-            </div>
-            <div className="flex gap-4">
-              <button className="flex items-center gap-2 font-bold text-sm bg-zinc-50 p-4 rounded-xl border border-zinc-100">
-                <Activity size={18} /> Activity Log
-              </button>
+              <div className="inline-flex items-center gap-2 bg-zinc-100 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest mb-4">
+                <Activity size={12} className="text-sky-blue" /> Live Activity
+              </div>
+              <h2 className="text-7xl font-black tracking-tighter leading-none">Your Manor.</h2>
             </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
             {/* Left Column - My Registrations */}
             <div className="lg:col-span-1 space-y-12">
-              <h3 className="text-xs font-black uppercase tracking-[0.3em] text-zinc-400 flex items-center gap-4">
-                Active Registrations <div className="h-[1px] bg-zinc-100 flex-grow" />
+              <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 flex items-center gap-4">
+                Active Estates <div className="h-[1px] bg-zinc-100 flex-grow" />
               </h3>
               
               <div className="space-y-6">
@@ -133,16 +123,16 @@ export default function IndividualDashboard() {
                   <motion.div 
                     key={reg.id}
                     whileHover={{ scale: 1.02 }}
-                    className="group card p-6 border-zinc-100 hover:border-black transition-all cursor-pointer overflow-hidden relative"
+                    className="group card p-6 border-zinc-100 hover:border-sky-blue transition-all cursor-pointer overflow-hidden relative"
                   >
                     <div className="absolute top-0 right-0 p-4">
-                      <ArrowUpRight size={16} className="text-zinc-200 group-hover:text-black transition-colors" />
+                      <ArrowUpRight size={16} className="text-zinc-200 group-hover:text-sky-blue transition-colors" />
                     </div>
-                    <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-4">{reg.status}</p>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-sky-blue mb-4">{reg.status}</p>
                     <h4 className="text-xl font-black tracking-tight mb-2 leading-tight">{reg.title}</h4>
                     <p className="text-xs font-bold text-zinc-400 mb-6">{reg.host}</p>
-                    <div className="flex items-center gap-2 text-xs font-bold">
-                      <Calendar size={14} /> {reg.date}
+                    <div className="flex items-center gap-2 text-xs font-bold text-zinc-500">
+                      <Calendar size={14} className="text-sky-blue" /> {reg.date}
                     </div>
                   </motion.div>
                 ))}
@@ -152,7 +142,7 @@ export default function IndividualDashboard() {
             {/* Right Column - Suggested Manor Events */}
             <div className="lg:col-span-2 space-y-12">
               <div className="flex justify-between items-center">
-                <h3 className="text-xs font-black uppercase tracking-[0.3em] text-zinc-400">For You (Manor Suggestions)</h3>
+                <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400">Curated for You</h3>
                 <Filter size={16} className="text-zinc-300 cursor-pointer hover:text-black transition-colors" />
               </div>
 
@@ -161,45 +151,42 @@ export default function IndividualDashboard() {
                   <motion.div
                     key={event.id}
                     whileHover={{ y: -5 }}
-                    className="card border-none bg-zinc-50 p-0 overflow-hidden group cursor-pointer"
+                    className="card border-none bg-zinc-50 p-0 overflow-hidden group cursor-pointer hover:shadow-sky-blue/10"
                   >
                     <div className="h-40 overflow-hidden relative">
                       <img 
                         src={event.image} 
                         alt={event.title} 
-                        className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100" 
+                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" 
                       />
                     </div>
                     <div className="p-8">
-                      <div className="flex items-center gap-2 mb-4">
-                        <span className="text-[10px] font-black uppercase tracking-widest bg-white px-2 py-1 rounded border border-zinc-100">
-                          {event.category}
-                        </span>
-                      </div>
-                      <h4 className="text-2xl font-black tracking-tight mb-2 group-hover:tracking-tighter transition-all">{event.title}</h4>
+                      <span className="tag-sky mb-4 inline-block">{event.category}</span>
+                      <h4 className="text-2xl font-black tracking-tight mb-2 group-hover:text-sky-blue transition-colors">{event.title}</h4>
                       <p className="text-sm font-bold text-zinc-400 mb-8">{event.host}</p>
                       
                       <div className="flex justify-between items-center pt-6 border-t border-zinc-200/50">
                         <div className="flex items-center gap-1 text-[10px] font-black uppercase text-zinc-300 group-hover:text-black transition-colors">
-                          <Users size={12} /> {event.participants.toLocaleString()} joined
+                          <Users size={12} /> {event.participants.toLocaleString()}
                         </div>
-                        <Plus size={18} className="text-zinc-200 group-hover:text-black group-hover:rotate-90 transition-all duration-500" />
+                        <Plus size={18} className="text-zinc-200 group-hover:text-sky-blue group-hover:rotate-90 transition-all duration-500" />
                       </div>
                     </div>
                   </motion.div>
                 ))}
               </div>
 
-              <div className="bg-zinc-900 text-white rounded-[2rem] p-12 flex flex-col md:flex-row justify-between items-center gap-8 relative overflow-hidden group">
+              <div className="bg-black text-white rounded-[2.5rem] p-12 flex flex-col md:flex-row justify-between items-center gap-8 relative overflow-hidden group">
+                <div className="absolute inset-0 bg-sky-blue/10 group-hover:bg-sky-blue/20 transition-colors" />
                 <div className="relative z-10">
                   <h4 className="text-4xl font-black tracking-tighter mb-4">Host Your <br /> Own Estate?</h4>
-                  <p className="text-zinc-400 font-medium">Create and manage your first event in minutes.</p>
+                  <p className="text-zinc-400 font-medium max-w-xs leading-relaxed">Establish your own presence in the Manor today.</p>
                 </div>
-                <Link href="/auth/role" className="btn-primary bg-white text-black hover:bg-zinc-200 px-8 py-4 relative z-10 font-black uppercase text-xs tracking-widest transition-all">
+                <Link href="/auth/role" className="btn-sky px-8 py-4 relative z-10 font-black uppercase text-xs tracking-widest transition-all">
                   Switch to Host
                 </Link>
-                <div className="absolute top-0 right-0 opacity-10 group-hover:rotate-12 transition-transform duration-1000">
-                  <Trophy size={200} />
+                <div className="absolute -bottom-10 -right-10 opacity-10 group-hover:scale-110 transition-transform duration-1000">
+                  <Sparkles size={240} />
                 </div>
               </div>
             </div>

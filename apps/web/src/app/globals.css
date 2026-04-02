@@ -2,36 +2,47 @@
 
 @theme {
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --color-sky-blue: #0ea5e9;
+  --color-sky-blue-hover: #0284c7;
+  --color-sky-blue-soft: #e0f2fe;
 }
 
 :root {
   --background: #ffffff;
-  --foreground: #111111;
-  --muted: #71717a;
-  --border: #e4e4e7;
-  --accent: #000000;
+  --foreground: #000000;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --accent: #0ea5e9;
 }
 
 @layer base {
   body {
-    @apply bg-white text-[#111111] antialiased selection:bg-black selection:text-white;
+    @apply bg-white text-black antialiased selection:bg-sky-blue selection:text-white;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-black text-white px-6 py-3 rounded-xl font-semibold transition-all hover:bg-zinc-800 active:scale-95 disabled:opacity-50;
+    @apply bg-black text-white px-6 py-3 rounded-xl font-bold transition-all hover:bg-zinc-800 active:scale-95 disabled:opacity-50 flex items-center justify-center gap-2;
   }
   
   .btn-secondary {
-    @apply bg-zinc-100 text-black px-6 py-3 rounded-xl font-semibold transition-all hover:bg-zinc-200 active:scale-95;
+    @apply bg-white text-black px-6 py-3 rounded-xl font-bold border-2 border-zinc-100 transition-all hover:border-sky-blue hover:text-sky-blue active:scale-95 flex items-center justify-center gap-2;
+  }
+
+  .btn-sky {
+    @apply bg-sky-blue text-white px-6 py-3 rounded-xl font-bold transition-all hover:bg-sky-blue-hover active:scale-95 flex items-center justify-center gap-2;
   }
 
   .input-field {
-    @apply w-full px-4 py-3 rounded-xl border border-zinc-200 bg-white focus:outline-none focus:ring-2 focus:ring-black/5 focus:border-black transition-all;
+    @apply w-full px-4 py-3 rounded-xl border border-zinc-200 bg-white focus:outline-none focus:ring-4 focus:ring-sky-blue/10 focus:border-sky-blue transition-all font-medium;
   }
 
   .card {
-    @apply bg-white border border-zinc-100 rounded-2xl p-8 shadow-sm transition-all hover:shadow-md;
+    @apply bg-white border border-zinc-100 rounded-[2rem] p-8 shadow-sm transition-all hover:shadow-xl hover:shadow-sky-blue/5 hover:border-sky-blue/20;
+  }
+
+  .tag-sky {
+    @apply bg-sky-blue-soft text-sky-blue-hover px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest;
   }
 }
