@@ -10,7 +10,7 @@ import {
   ArrowRight, 
   Loader2, 
   ShieldCheck,
-  Github
+  Globe
 } from "lucide-react";
 import Link from "next/link";
 
@@ -104,7 +104,7 @@ export default function LoginPage() {
             <img src="https://www.google.com/favicon.ico" className="w-4 h-4 grayscale" alt="Google" /> Google
           </button>
           <button className="btn-secondary py-4 rounded-xl text-xs flex items-center justify-center gap-2">
-            <Github size={16} /> GitHub
+            <Globe size={16} /> GitHub
           </button>
         </div>
       </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -29,7 +29,7 @@ const signupSchema = z.object({
 
 type SignupValues = z.infer<typeof signupSchema>;
 
-export default function SignupPage() {
+function SignupForm() {
   const searchParams = useSearchParams();
   const role = searchParams.get("role") || "individual";
   const [isLoading, setIsLoading] = useState(false);
@@ -45,7 +45,6 @@ export default function SignupPage() {
 
   const onSubmit = async (data: SignupValues) => {
     setIsLoading(true);
-    // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 2000));
     setIsLoading(false);
     setIsSuccess(true);
@@ -160,5 +159,17 @@ export default function SignupPage() {
         </p>
       </div>
     </div>
+  );
+}
+
+export default function SignupPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center p-20">
+        <Loader2 className="animate-spin text-sky-blue" size={40} />
+      </div>
+    }>
+      <SignupForm />
+    </Suspense>
   );
 }
