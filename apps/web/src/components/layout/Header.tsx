@@ -15,8 +15,8 @@ export const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Don't show header on auth pages if we want a clean auth experience
-  if (pathname.startsWith("/auth")) return null;
+  // Ensure header is always visible for navigation
+  const isAuthPage = pathname.startsWith("/auth");
 
   return (
     <header 
