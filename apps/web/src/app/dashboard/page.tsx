@@ -60,15 +60,10 @@ export default function IndividualDashboard() {
   ];
 
   return (
-    <div className="min-h-screen bg-white flex">
+    <div className="min-h-screen bg-white flex pt-20">
       {/* Sidebar - Personal Stats */}
-      <aside className="w-96 bg-zinc-50 border-r border-zinc-100 p-12 hidden lg:flex flex-col fixed h-screen overflow-y-auto">
-        <div className="flex items-center gap-2 mb-16">
-          <div className="w-6 h-6 bg-black rounded flex items-center justify-center">
-            <div className="w-3 h-3 bg-sky-blue rounded-sm rotate-45" />
-          </div>
-          <div className="text-xl font-black tracking-tighter">HM.</div>
-        </div>
+      <aside className="w-96 bg-zinc-50 border-r border-zinc-100 p-12 hidden lg:flex flex-col fixed h-screen overflow-y-auto mt-4">
+        
         
         <div className="space-y-12">
           <div className="flex flex-col items-center text-center">

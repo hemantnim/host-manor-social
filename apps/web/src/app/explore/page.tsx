@@ -61,24 +61,18 @@ export default function ExploreFeed() {
   const filteredEvents = activeTab === "all" ? events : events.filter(e => e.category === activeTab);
 
   return (
-    <div className="min-h-screen bg-zinc-50 flex">
-      <aside className="w-80 bg-white border-r border-zinc-100 p-8 hidden xl:flex flex-col fixed h-screen">
-        <div className="flex items-center gap-2 mb-12">
-          <div className="w-6 h-6 bg-black rounded flex items-center justify-center">
-            <div className="w-3 h-3 bg-sky-blue rounded-sm rotate-45" />
-          </div>
-          <div className="text-xl font-black tracking-tighter">HM.</div>
-        </div>
-        
+    <div className="min-h-screen bg-zinc-50 flex pt-20">
+      {/* Sidebar - Quick Navigation */}
+      <aside className="w-80 bg-white border-r border-zinc-100 p-8 hidden xl:flex flex-col fixed h-screen mt-4">
+
         <nav className="space-y-2">
-          <Link href="/explore" className="flex items-center gap-3 font-bold text-sky-blue bg-sky-blue/5 p-3 rounded-xl">
-            <Globe size={20} /> Feed
+          <Link href="/explore" className="flex items-center gap-3 font-bold text-sky-blue bg-sky-blue/5 p-3 rounded-xl uppercase text-[10px] tracking-widest">
+            <Globe size={18} /> Global Feed
           </Link>
-          <Link href="/organizations" className="flex items-center gap-3 font-bold text-zinc-400 hover:text-black p-3 transition-colors">
-            <Users size={20} /> Organizations
+          <Link href="/organizations" className="flex items-center gap-3 font-bold text-zinc-400 hover:text-black p-3 transition-colors uppercase text-[10px] tracking-widest">
+            <Users size={18} /> Directory
           </Link>
         </nav>
-
         <div className="mt-auto space-y-4">
           <div className="bg-zinc-900 rounded-2xl p-6 text-white relative overflow-hidden group">
             <div className="relative z-10">

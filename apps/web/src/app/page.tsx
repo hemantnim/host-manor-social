@@ -6,23 +6,7 @@ import { motion } from "framer-motion";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white">
-      {/* Navigation */}
-      <nav className="max-w-7xl mx-auto px-6 py-8 flex justify-between items-center">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-black rounded-lg flex items-center justify-center">
-            <div className="w-4 h-4 bg-sky-blue rounded-sm rotate-45" />
-          </div>
-          <div className="text-2xl font-black tracking-tighter">Host Manor.</div>
-        </div>
-        <div className="flex gap-8 items-center font-bold text-[10px] uppercase tracking-[0.2em] text-zinc-400">
-          <Link href="/explore" className="hover:text-sky-blue transition-colors">Explore</Link>
-          <Link href="/organizations" className="hover:text-sky-blue transition-colors">Organizations</Link>
-          <Link href="/auth/login" className="hover:text-black transition-colors">Log In</Link>
-          <Link href="/auth/role" className="btn-sky py-2 px-6 text-[10px] rounded-full">Join the Manor</Link>
-        </div>
-      </nav>
-
+    <div className="min-h-screen bg-white pt-24">
       {/* Hero Section */}
       <main className="max-w-7xl mx-auto px-6 pt-32 pb-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
