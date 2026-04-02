@@ -62,7 +62,7 @@ export default function RoleSelection() {
 
         <div className="mt-16 flex flex-col items-center">
           <Link 
-            href={selected ? `/auth/signup?role=${selected}` : "#"}
+            href={selected === "organization" ? "/auth/onboarding/organization" : `/auth/signup?role=${selected}`}
             className={`btn-primary flex items-center gap-2 px-12 py-4 text-lg ${
               !selected && "opacity-20 cursor-not-allowed"
             }`}
