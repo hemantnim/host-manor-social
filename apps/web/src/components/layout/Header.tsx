@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Globe, Users, LogIn, LayoutDashboard, Plus } from "lucide-react";
+import { Globe, Users, LogIn, LayoutDashboard, Plus, Search } from "lucide-react";
 
 export const Header = () => {
   const pathname = usePathname();
@@ -35,6 +35,14 @@ export const Header = () => {
         </Link>
 
         <nav className="hidden md:flex gap-10 items-center">
+          <Link 
+            href="/search" 
+            className={`text-[10px] font-black uppercase tracking-[0.2em] transition-colors flex items-center gap-2 ${
+              pathname === "/search" ? "text-sky-blue" : "text-zinc-400 hover:text-black"
+            }`}
+          >
+            <Search size={14} /> Search
+          </Link>
           <Link 
             href="/explore" 
             className={`text-[10px] font-black uppercase tracking-[0.2em] transition-colors flex items-center gap-2 ${
