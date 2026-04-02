@@ -21,8 +21,8 @@ export const Header = () => {
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
-        scrolled 
-        ? "py-4 bg-white/80 backdrop-blur-xl border-b border-zinc-100 shadow-sm" 
+        (scrolled || isAuthPage)
+        ? "py-4 bg-white border-b border-zinc-100 shadow-sm" 
         : "py-8 bg-transparent"
       }`}
     >
@@ -31,7 +31,7 @@ export const Header = () => {
           <div className="w-8 h-8 bg-black rounded-lg flex items-center justify-center transition-transform group-hover:rotate-12 border border-white/10">
             <div className="w-4 h-4 bg-sky-blue rounded-sm rotate-45" />
           </div>
-          <div className={`text-2xl font-black tracking-tighter ${isAuthPage && !scrolled ? "text-white lg:text-white" : "text-black"}`}>
+          <div className="text-2xl font-black tracking-tighter text-black">
             Host Manor.
           </div>
         </Link>
@@ -49,7 +49,7 @@ export const Header = () => {
               className={`text-[10px] font-black uppercase tracking-[0.2em] transition-colors flex items-center gap-2 ${
                 pathname === item.href 
                 ? "text-sky-blue" 
-                : (isAuthPage && !scrolled ? "text-white/60 hover:text-white" : "text-zinc-400 hover:text-black")
+                : "text-zinc-400 hover:text-black"
               }`}
             >
               {item.icon} {item.label}
@@ -60,9 +60,7 @@ export const Header = () => {
         <div className="flex items-center gap-4">
           <Link 
             href="/auth/login" 
-            className={`text-[10px] font-black uppercase tracking-[0.2em] px-4 py-2 transition-colors ${
-              isAuthPage && !scrolled ? "text-white/60 hover:text-white" : "text-zinc-400 hover:text-black"
-            }`}
+            className="text-[10px] font-black uppercase tracking-[0.2em] px-4 py-2 transition-colors text-zinc-400 hover:text-black"
           >
             Log In
           </Link>
