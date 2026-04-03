@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Globe, Users, LogIn, LayoutDashboard, Plus, Search } from "lucide-react";
+import { Globe, Users, LogIn, LayoutDashboard, Plus, Search, Trophy } from "lucide-react";
 
 export const Header = () => {
   const pathname = usePathname();
