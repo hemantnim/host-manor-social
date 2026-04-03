@@ -167,7 +167,7 @@ export default function SearchHub() {
                     </div>
                     <div className="text-right shrink-0">
                       <p className="text-xl font-black tracking-tighter">
-                        {item.type === 'organization' ? (item.followers / 1000).toFixed(1) + 'K' : (item.participants / 1000).toFixed(1) + 'K'}
+                        {item.type === 'organization' ? ((item.followers ?? 0) / 1000).toFixed(1) + 'K' : ((item.participants ?? 0) / 1000).toFixed(1) + 'K'}
                       </p>
                       <p className="text-[10px] font-black uppercase tracking-widest text-zinc-300">
                         {item.type === 'organization' ? 'Followers' : 'Participants'}
