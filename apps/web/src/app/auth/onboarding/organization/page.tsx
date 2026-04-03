@@ -14,24 +14,30 @@ import {
   MapPin,
   CheckCircle2,
   Sparkles,
-  School,
-  Milestone,
-  Users,
+  ShieldCheck,
+  Mail,
+  Loader2,
+  Lock,
   Target
 } from "lucide-react";
 import Link from "next/link";
+import { ManorOTP } from "@/components/ui/ManorOTP";
+import { toast } from "sonner";
 
 type OrgType = "school" | "college" | "startup" | "company";
 
 export default function OrganizationOnboarding() {
   const [step, setStep] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const [verificationState, setVerificationState] = useState<"email" | "otp" | "verified">("email");
   const [formData, setFormData] = useState({
     type: "" as OrgType,
     name: "",
     website: "",
     location: "",
     bio: "",
-    // Specialized Fields
+    officialEmail: "",
+    isVerified: false,
     specialized: {} as Record<string, string>
   });
 
@@ -52,17 +58,50 @@ export default function OrganizationOnboarding() {
     });
   };
 
+  const handleEmailSubmit = async () => {
+    const domain = formData.officialEmail.split("@")[1];
+    const genericDomains = ["gmail.com", "yahoo.com", "outlook.com", "hotmail.com", "icloud.com"];
+    
+    if (!formData.officialEmail.includes("@") || genericDomains.includes(domain)) {
+      toast.error("Invalid Estate Domain", {
+        description: "Please use your official institutional email address."
+      });
+      return;
+    }
+
+    setIsLoading(true);
+    // Simulate domain integrity check
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    setIsLoading(false);
+    setVerificationState("otp");
+    toast.info("Passkey Dispatched", {
+      description: `A 6-digit code has been sent to ${formData.officialEmail}`
+    });
+  };
+
+  const handleOTPComplete = async (code: string) => {
+    setIsLoading(true);
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    setIsLoading(false);
+    setVerificationState("verified");
+    setFormData({ ...formData, isVerified: true });
+    toast.success("Identity Verified", {
+      description: "Your institutional domain has been established."
+    });
+    setTimeout(nextStep, 1000);
+  };
+
   return (
     <div className="min-h-screen bg-white flex flex-col">
       <nav className="max-w-7xl mx-auto px-6 py-8 w-full flex justify-between items-center fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-xl z-[110]">
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="w-6 h-6 bg-black rounded flex items-center justify-center group-hover:rotate-12 transition-transform">
+          <div className="w-6 h-6 bg-black rounded flex items-center justify-center group-hover:rotate-12 transition-transform border border-white/10">
             <div className="w-3 h-3 bg-sky-blue rounded-sm rotate-45" />
           </div>
           <div className="text-xl font-black tracking-tighter">HM.</div>
         </Link>
         <div className="flex gap-2">
-          {[1, 2, 3, 4, 5].map((i) => (
+          {[1, 2, 3, 4, 5, 6].map((i) => (
             <div key={i} className={`h-1 w-10 rounded-full transition-all duration-500 ${step >= i ? "bg-black" : "bg-zinc-100"}`} />
           ))}
         </div>
@@ -76,7 +115,7 @@ export default function OrganizationOnboarding() {
             {step === 1 && (
               <motion.div key="step1" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
                 <div className="text-center mb-16">
-                  <h1 className="text-6xl font-black tracking-tightest mb-4">The Nature of <br /> Your <span className="text-sky-blue italic">Estate.</span></h1>
+                  <h1 className="text-6xl font-black tracking-tightest mb-4 text-center leading-none">The Nature of <br /> Your <span className="text-sky-blue italic">Estate.</span></h1>
                   <p className="text-zinc-500 font-medium text-lg">Choose your entity type to personalize your onboarding.</p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -101,8 +140,8 @@ export default function OrganizationOnboarding() {
             {step === 2 && (
               <motion.div key="step2" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-12">
                 <div>
-                  <h2 className="text-6xl font-black tracking-tightest leading-none mb-4 uppercase text-[10px] font-bold tracking-[0.3em] text-zinc-400">Identity</h2>
-                  <h3 className="text-7xl font-black tracking-tighter">Naming the <br /> <span className="text-sky-blue italic">Establishment.</span></h3>
+                  <h2 className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 mb-4">Identity</h2>
+                  <h3 className="text-7xl font-black tracking-tighter leading-none">Naming the <br /> <span className="text-sky-blue italic">Establishment.</span></h3>
                 </div>
                 <div className="space-y-8">
                   <input
@@ -130,9 +169,91 @@ export default function OrganizationOnboarding() {
               </motion.div>
             )}
 
-            {/* Step 3: SPECIALIZED DETAILS (Optional Skip) */}
+            {/* NEW Step 3: Identity Verification (Mandatory for Company) */}
             {step === 3 && (
               <motion.div key="step3" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-12">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h2 className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 mb-4">Verification</h2>
+                    <h3 className="text-6xl font-black tracking-tighter">Official <br /> <span className="text-sky-blue italic">Credentials.</span></h3>
+                  </div>
+                  {formData.type !== "company" && (
+                    <button onClick={nextStep} className="text-[10px] font-black uppercase tracking-widest text-zinc-300 hover:text-sky-blue transition-colors pt-4">Skip for Now</button>
+                  )}
+                </div>
+
+                <div className="bg-zinc-50 rounded-[2.5rem] p-10 border border-zinc-100">
+                  <AnimatePresence mode="wait">
+                    {verificationState === "email" && (
+                      <motion.div key="email-input" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-8">
+                        <div className="space-y-4">
+                          <label className="text-[10px] font-black uppercase tracking-widest text-zinc-400 ml-2">Institutional Domain Email</label>
+                          <div className="relative group">
+                            <Mail className="absolute left-6 top-1/2 -translate-y-1/2 text-zinc-300 group-focus-within:text-sky-blue transition-colors" size={24} />
+                            <input
+                              type="email"
+                              placeholder="e.g. registry@stanford.edu"
+                              className="w-full bg-white border-2 border-zinc-100 p-6 pl-16 rounded-2xl focus:border-sky-blue outline-none transition-all font-bold text-xl"
+                              value={formData.officialEmail}
+                              onChange={(e) => setFormData({ ...formData, officialEmail: e.target.value })}
+                            />
+                          </div>
+                          <p className="text-[10px] font-medium text-zinc-400 leading-relaxed ml-2">
+                            Our intelligence engine will verify the domain integrity against your establishment name.
+                          </p>
+                        </div>
+                        <button 
+                          disabled={isLoading || !formData.officialEmail}
+                          onClick={handleEmailSubmit}
+                          className="btn-sky w-full py-5 rounded-2xl text-lg flex items-center justify-center gap-3"
+                        >
+                          {isLoading ? <Loader2 className="animate-spin" size={24} /> : <>Verify Domain <ShieldCheck size={20} /></>}
+                        </button>
+                      </motion.div>
+                    )}
+
+                    {verificationState === "otp" && (
+                      <motion.div key="otp-input" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-10 text-center">
+                        <div className="space-y-4">
+                          <div className="w-16 h-16 bg-sky-blue/10 rounded-2xl flex items-center justify-center mx-auto text-sky-blue">
+                            <Lock size={32} />
+                          </div>
+                          <h4 className="text-2xl font-black tracking-tight">Enter Passkey</h4>
+                          <p className="text-zinc-500 font-medium max-w-xs mx-auto">We've dispatched a secure code to <span className="text-black font-bold">{formData.officialEmail}</span></p>
+                        </div>
+                        
+                        <ManorOTP onComplete={handleOTPComplete} isLoading={isLoading} />
+                        
+                        <button 
+                          onClick={() => setVerificationState("email")}
+                          className="text-[10px] font-black uppercase tracking-widest text-zinc-400 hover:text-black transition-colors"
+                        >
+                          Use Different Email
+                        </button>
+                      </motion.div>
+                    )}
+
+                    {verificationState === "verified" && (
+                      <motion.div key="verified-success" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-10">
+                        <div className="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6 text-green-500">
+                          <CheckCircle2 size={40} />
+                        </div>
+                        <h4 className="text-3xl font-black tracking-tight mb-2">Authenticated.</h4>
+                        <p className="text-zinc-500 font-medium">Proceeding to estate specifications...</p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
+                <div className="flex justify-between pt-8 border-t border-zinc-100">
+                  <button onClick={prevStep} className="btn-secondary">Back</button>
+                </div>
+              </motion.div>
+            )}
+
+            {/* Step 4: SPECIALIZED DETAILS */}
+            {step === 4 && (
+              <motion.div key="step4" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-12">
                 <div className="flex justify-between items-start">
                   <div>
                     <h2 className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 mb-4">Specialization</h2>
@@ -212,9 +333,9 @@ export default function OrganizationOnboarding() {
               </motion.div>
             )}
 
-            {/* Step 4: Branding (Optional Skip) */}
-            {step === 4 && (
-              <motion.div key="step4" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-12">
+            {/* Step 5: Branding */}
+            {step === 5 && (
+              <motion.div key="step5" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-12">
                 <div className="flex justify-between items-start">
                   <div>
                     <h2 className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 mb-4">Aesthetics</h2>
@@ -241,9 +362,9 @@ export default function OrganizationOnboarding() {
               </motion.div>
             )}
 
-            {/* Step 5: Success */}
-            {step === 5 && (
-              <motion.div key="step5" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-20">
+            {/* Step 6: Success */}
+            {step === 6 && (
+              <motion.div key="step6" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-20">
                 <div className="w-24 h-24 bg-sky-blue/10 rounded-[2rem] flex items-center justify-center mx-auto mb-10 text-sky-blue shadow-xl shadow-sky-blue/10">
                   <CheckCircle2 size={48} className="animate-bounce" />
                 </div>
