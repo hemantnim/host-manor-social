@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Mail, Sparkles, Loader2, CheckCircle2 } from "lucide-react";
+import { X, Mail, Sparkles, Loader2, CheckCircle2, ShieldCheck } from "lucide-react";
+import { toast } from "sonner";
 
 interface ManorNewsletterProps {
   isOpen: boolean;
@@ -20,6 +21,10 @@ export const ManorNewsletter: React.FC<ManorNewsletterProps> = ({ isOpen, onClos
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1500));
     setStatus("success");
+    toast.success("Intelligence Subscription Secured", {
+      description: "You've been added to the Manor Network.",
+      icon: <ShieldCheck size={18} className="text-sky-blue" />,
+    });
   };
 
   return (
