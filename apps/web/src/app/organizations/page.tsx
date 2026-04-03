@@ -14,14 +14,17 @@ import {
   Building2,
   GraduationCap,
   Rocket,
-  Briefcase
+  Briefcase,
+  Shield
 } from "lucide-react";
 import Link from "next/link";
+import { VerifiedBadge } from "@/components/ui/badges/VerifiedBadge";
 
 export default function OrganizationsDirectory() {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeType, setActiveTab] = useState("all");
   const [followedOrgs, setFollowedOrgs] = useState<number[]>([]);
+  const [verifiedOnly, setVerifiedOnly] = useState(false);
 
   const orgTypes = [
     { id: "all", label: "All Estates", icon: null },
@@ -77,7 +80,8 @@ export default function OrganizationsDirectory() {
   const filteredOrgs = allOrgs.filter(org => {
     const matchesSearch = org.name.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesType = activeType === "all" || org.type === activeType;
-    return matchesSearch && matchesType;
+    const matchesVerified = !verifiedOnly || org.verified;
+    return matchesSearch && matchesType && matchesVerified;
   });
 
   const toggleFollow = (id: number) => {
@@ -125,8 +129,8 @@ export default function OrganizationsDirectory() {
 
       {/* Filter Bar */}
       <nav className="sticky top-0 bg-white/80 backdrop-blur-xl border-b border-zinc-100 z-50 py-6">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex gap-4 overflow-x-auto scrollbar-hide">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="flex gap-4 overflow-x-auto scrollbar-hide w-full md:w-auto">
             {orgTypes.map((type) => (
               <button
                 key={type.id}
@@ -141,6 +145,15 @@ export default function OrganizationsDirectory() {
               </button>
             ))}
           </div>
+
+          <button 
+            onClick={() => setVerifiedOnly(!verifiedOnly)}
+            className={`flex items-center gap-3 px-6 py-3 rounded-2xl font-black text-[10px] uppercase tracking-widest transition-all ${
+              verifiedOnly ? "bg-black text-white" : "bg-zinc-50 text-zinc-400"
+            }`}
+          >
+            <Shield size={14} className={verifiedOnly ? "text-sky-blue" : ""} /> Verified Only
+          </button>
         </div>
       </nav>
 
@@ -163,15 +176,13 @@ export default function OrganizationsDirectory() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute bottom-6 left-8 flex items-center gap-3">
                     <div className="w-12 h-12 bg-white rounded-xl p-1 shadow-xl">
-                      <div className="w-full h-full bg-zinc-100 rounded-lg flex items-center justify-center font-black text-xs">
+                      <div className="w-full h-full bg-zinc-100 rounded-lg flex items-center justify-center font-black text-xs text-black">
                         {org.name[0]}
                       </div>
                     </div>
                     <div>
                       <h3 className="text-white font-black tracking-tight">{org.name}</h3>
-                      <div className="flex items-center gap-1 text-sky-blue text-[10px] font-black uppercase tracking-widest">
-                        {org.verified && <ShieldCheck size={10} />} Verified Estate
-                      </div>
+                      {org.verified && <VerifiedBadge />}
                     </div>
                   </div>
                 </div>
