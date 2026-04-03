@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { User, Building2, ArrowRight, GraduationCap, Briefcase, Rocket, ShieldCheck } from "lucide-react";
+import { User, Building2, ArrowRight, GraduationCap, Briefcase, Rocket, ShieldCheck, Trophy, Star } from "lucide-react";
 import Link from "next/link";
 
 export default function RoleSelection() {
