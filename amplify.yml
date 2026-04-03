@@ -10,7 +10,7 @@ applications:
           commands:
             - npm run build
       artifacts:
-        baseDirectory: apps/web/.amplify-hosting
+        baseDirectory: .next
         files:
           - '**/*'
       cache:
