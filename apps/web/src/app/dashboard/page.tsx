@@ -85,7 +85,10 @@ export default function IndividualDashboard() {
             </div>
           </div>
 
-          <div className="pt-8 border-t border-zinc-100">
+          <div className="pt-8 border-t border-zinc-100 space-y-4">
+            <Link href="/dashboard/following" className="btn-secondary w-full py-4 rounded-2xl text-[10px] uppercase tracking-widest font-black">
+              My Following
+            </Link>
             <Link href="/explore" className="btn-sky w-full flex items-center justify-center gap-2 py-4 rounded-2xl">
               <Plus size={20} /> Discover Estates
             </Link>
