@@ -126,7 +126,7 @@ export default function OrganizationOnboarding() {
                       className="p-8 rounded-3xl border-2 border-zinc-100 text-left transition-all hover:border-sky-blue hover:bg-sky-blue/[0.02] group"
                     >
                       <div className="w-12 h-12 bg-zinc-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-sky-blue group-hover:text-white transition-colors">
-                        {React.cloneElement(type.icon as React.ReactElement, { size: 24 })}
+                        {type.icon}
                       </div>
                       <h3 className="text-xl font-bold mb-2 tracking-tight group-hover:text-sky-blue transition-colors">{type.label}</h3>
                       <p className="text-zinc-400 text-sm font-medium">{type.desc}</p>
