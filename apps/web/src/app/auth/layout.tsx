@@ -3,31 +3,24 @@ import Link from "next/link";
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-white flex flex-col lg:flex-row pt-20 lg:pt-0">
-      {/* Visual Sidebar */}
-      <div className="hidden lg:flex lg:w-1/2 bg-black relative overflow-hidden items-center justify-center p-20">
-        <div className="absolute inset-0 bg-sky-blue/10" />
-        <div className="absolute top-[-10%] -left-10 w-[500px] h-[500px] bg-sky-blue/20 blur-[120px] rounded-full" />
-        
-        <div className="relative z-10 max-w-md">
-          <h2 className="text-7xl font-black text-white tracking-tightest leading-[0.9] mb-8">
-            The Digital <br /> <span className="text-sky-blue italic">Estate</span> Awaits.
-          </h2>
-          <p className="text-zinc-400 text-xl font-medium leading-relaxed">
-            Establish your presence in the most elite social hosting ecosystem.
-          </p>
+    <div className="min-h-screen bg-white relative overflow-hidden">
+      {/* Decorative background elements */}
+      <div className="absolute top-[-10%] -left-10 w-[600px] h-[600px] bg-sky-blue/5 blur-[120px] rounded-full z-0" />
+      <div className="absolute bottom-[-10%] -right-10 w-[600px] h-[600px] bg-sky-blue/5 blur-[120px] rounded-full z-0" />
+      
+      {/* Main Content Area */}
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6">
+        <div className="w-full max-w-4xl bg-white rounded-[3rem] shadow-2xl shadow-sky-blue/5 border border-zinc-100/50 overflow-hidden">
+          <div className="flex flex-col lg:flex-row">
+            {children}
+          </div>
         </div>
 
-        <div className="absolute bottom-12 left-12 right-12 flex justify-between items-center text-[10px] font-black uppercase tracking-[0.3em] text-zinc-500">
-          <span>Verified Security</span>
-          <span>Host Manor v1.0</span>
-        </div>
-      </div>
-
-      {/* Auth Content */}
-      <div className="flex-1 flex flex-col items-center justify-center p-6 md:p-20">
-        <div className="w-full max-w-md">
-          {children}
+        {/* Footer for Auth pages */}
+        <div className="mt-12 flex gap-12 text-[10px] font-black uppercase tracking-[0.3em] text-zinc-300">
+          <span>Verified Protocol</span>
+          <span>Host Manor Social v1.0</span>
+          <span>Secure Cloud</span>
         </div>
       </div>
     </div>

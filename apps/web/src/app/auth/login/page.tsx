@@ -10,9 +10,11 @@ import {
   ArrowRight, 
   Loader2, 
   ShieldCheck,
-  Globe
+  Globe,
+  LogIn
 } from "lucide-react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 const loginSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -34,84 +36,84 @@ export default function LoginPage() {
 
   const onSubmit = async (data: LoginValues) => {
     setIsLoading(true);
-    // Simulate login
     await new Promise(resolve => setTimeout(resolve, 2000));
     window.location.href = "/dashboard";
   };
 
   return (
-    <div className="space-y-10">
-      <div>
-        <h1 className="text-5xl font-black tracking-tightest">Welcome Back.</h1>
-        <p className="text-zinc-400 font-medium mt-2">Enter your credentials to access your estate.</p>
+    <div className="max-w-xl mx-auto w-full py-24 px-6 md:px-12">
+      <div className="text-center mb-16">
+        <div className="inline-flex items-center gap-2 bg-zinc-50 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest mb-4 border border-zinc-100">
+          <LogIn size={12} className="text-sky-blue" /> Member Access
+        </div>
+        <h1 className="text-7xl font-black tracking-tightest mb-4 leading-none">Welcome <br /> <span className="text-sky-blue italic">Home.</span></h1>
+        <p className="text-zinc-400 font-medium text-lg">Access your digital estate and connections.</p>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
         <div className="space-y-2">
-          <label className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Email Address</label>
-          <div className="relative">
-            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-300" size={18} />
+          <label className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400 ml-4">Registry Email</label>
+          <div className="relative group">
+            <Mail className="absolute left-6 top-1/2 -translate-y-1/2 text-zinc-300 group-focus-within:text-sky-blue transition-colors" size={20} />
             <input 
               {...register("email")}
               type="email" 
-              placeholder="john@manor.com"
-              className={`input-field pl-12 ${errors.email ? "border-red-500" : ""}`}
+              placeholder="resident@manor.com"
+              className={`input-field pl-16 py-5 rounded-3xl border-2 ${errors.email ? "border-red-100" : "border-zinc-50"}`}
             />
           </div>
-          {errors.email && <p className="text-red-500 text-xs font-bold">{errors.email.message}</p>}
+          {errors.email && <p className="text-red-500 text-[10px] font-black uppercase tracking-widest ml-4">{errors.email.message}</p>}
         </div>
 
         <div className="space-y-2">
-          <div className="flex justify-between items-center">
-            <label className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Password</label>
-            <Link href="#" className="text-[10px] font-black uppercase tracking-widest text-sky-blue hover:underline">Forgot?</Link>
+          <div className="flex justify-between items-center px-4">
+            <label className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400">Passkey</label>
+            <Link href="#" className="text-[10px] font-black uppercase tracking-[0.2em] text-sky-blue hover:underline">Forgot Passkey?</Link>
           </div>
-          <div className="relative">
-            <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-300" size={18} />
+          <div className="relative group">
+            <Lock className="absolute left-6 top-1/2 -translate-y-1/2 text-zinc-300 group-focus-within:text-sky-blue transition-colors" size={20} />
             <input 
               {...register("password")}
               type="password" 
               placeholder="••••••••"
-              className={`input-field pl-12 ${errors.password ? "border-red-500" : ""}`}
+              className={`input-field pl-16 py-5 rounded-3xl border-2 ${errors.password ? "border-red-100" : "border-zinc-50"}`}
             />
           </div>
-          {errors.password && <p className="text-red-500 text-xs font-bold">{errors.password.message}</p>}
+          {errors.password && <p className="text-red-500 text-[10px] font-black uppercase tracking-widest ml-4">{errors.password.message}</p>}
         </div>
 
         <button 
           disabled={isLoading}
           type="submit" 
-          className="btn-sky w-full py-5 text-lg rounded-2xl group mt-4"
+          className="btn-sky w-full py-6 text-xl rounded-[2rem] group mt-8 shadow-xl shadow-sky-blue/20"
         >
           {isLoading ? (
-            <Loader2 className="animate-spin" size={24} />
+            <Loader2 className="animate-spin" size={28} />
           ) : (
-            <>Sign Into Manor <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" /></>
+            <>Access Manor <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" /></>
           )}
         </button>
       </form>
 
-      <div className="space-y-6 pt-4">
-        <div className="relative">
-          <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-zinc-100"></div></div>
-          <div className="relative flex justify-center text-[10px] font-black uppercase tracking-widest text-zinc-300">
-            <span className="bg-white px-4">Or continue with</span>
-          </div>
+      <div className="space-y-10 pt-16">
+        <div className="relative flex justify-center">
+          <div className="absolute inset-0 flex items-center px-12"><div className="w-full border-t border-zinc-100"></div></div>
+          <span className="relative bg-white px-6 text-[10px] font-black uppercase tracking-[0.3em] text-zinc-300">Fast Access</span>
         </div>
 
         <div className="grid grid-cols-2 gap-4">
-          <button className="btn-secondary py-4 rounded-xl text-xs flex items-center justify-center gap-2">
-            <img src="https://www.google.com/favicon.ico" className="w-4 h-4 grayscale" alt="Google" /> Google
+          <button className="btn-secondary py-4 rounded-2xl text-[10px] uppercase font-black tracking-widest flex items-center justify-center gap-2 hover:bg-zinc-50">
+            <img src="https://www.google.com/favicon.ico" className="w-4 h-4 grayscale opacity-50" alt="Google" /> Google
           </button>
-          <button className="btn-secondary py-4 rounded-xl text-xs flex items-center justify-center gap-2">
-            <Globe size={16} /> GitHub
+          <button className="btn-secondary py-4 rounded-2xl text-[10px] uppercase font-black tracking-widest flex items-center justify-center gap-2 hover:bg-zinc-50">
+            <Globe size={16} className="text-zinc-300" /> LinkedIn
           </button>
         </div>
       </div>
 
-      <div className="text-center pt-4">
-        <p className="text-zinc-400 text-sm font-medium">
-          New to the Manor? <Link href="/auth/role" className="text-black font-black hover:text-sky-blue underline transition-colors">Create Account</Link>
+      <div className="text-center pt-16">
+        <p className="text-zinc-400 text-sm font-medium uppercase tracking-widest text-[10px]">
+          Not yet established? <Link href="/auth/role" className="text-black font-black hover:text-sky-blue underline transition-colors">Join the Manor</Link>
         </p>
       </div>
     </div>
