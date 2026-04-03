@@ -42,6 +42,7 @@ export const Header = () => {
               { label: "Search", href: "/search", icon: <Search size={14} /> },
               { label: "Explore", href: "/explore", icon: <Globe size={14} /> },
               { label: "Estates", href: "/organizations", icon: <Users size={14} /> },
+              { label: "Experts", href: "/experts", icon: <Trophy size={14} /> },
               { label: "My Manor", href: "/dashboard", icon: <LayoutDashboard size={14} /> },
             ].map((item) => (
               <Link 
