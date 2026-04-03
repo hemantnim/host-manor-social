@@ -130,24 +130,27 @@ export default function OrganizationOnboarding() {
               </motion.div>
             )}
 
-            {/* Step 3: SPECIALIZED DETAILS (The Dynamic Part) */}
+            {/* Step 3: SPECIALIZED DETAILS (Optional Skip) */}
             {step === 3 && (
               <motion.div key="step3" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-12">
-                <div>
-                  <h2 className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 mb-4">Specialization</h2>
-                  <h3 className="text-6xl font-black tracking-tighter capitalize">{formData.type} <br /> <span className="text-sky-blue italic">Specifications.</span></h3>
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h2 className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 mb-4">Specialization</h2>
+                    <h3 className="text-6xl font-black tracking-tighter capitalize">{formData.type} <br /> <span className="text-sky-blue italic">Specifications.</span></h3>
+                  </div>
+                  <button onClick={nextStep} className="text-[10px] font-black uppercase tracking-widest text-zinc-300 hover:text-sky-blue transition-colors pt-4">Skip for Now</button>
                 </div>
 
                 <div className="grid grid-cols-1 gap-10">
                   {formData.type === "school" && (
                     <>
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Board of Affiliation</label>
+                        <label className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Board of Affiliation <span className="text-[8px] opacity-50 ml-1">(Optional)</span></label>
                         <input type="text" placeholder="e.g. CBSE, IB, ICSE" className="input-field py-5 text-xl font-bold" onChange={(e) => updateSpecialized("board", e.target.value)} />
                       </div>
                       <div className="space-y-2">
                         <label className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Principal's Name</label>
-                        <input type="text" placeholder="Full name of head" className="input-field py-5 text-xl font-bold" onChange={(e) => updateSpecialized("principal", e.target.value)} />
+                        <input type="text" placeholder="Full name of head" className="input-field py-5 text-xl font-bold" onChange={(e) => updateSpecialized("principal", e.target.value)} required />
                       </div>
                     </>
                   )}
@@ -155,12 +158,12 @@ export default function OrganizationOnboarding() {
                   {formData.type === "college" && (
                     <>
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Campus Area (Acres)</label>
+                        <label className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Campus Area (Acres) <span className="text-[8px] opacity-50 ml-1">(Optional)</span></label>
                         <input type="number" placeholder="Total acreage" className="input-field py-5 text-xl font-bold" onChange={(e) => updateSpecialized("campus", e.target.value)} />
                       </div>
                       <div className="space-y-2">
                         <label className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Highest Accreditation</label>
-                        <input type="text" placeholder="e.g. NAAC A++, Tier 1" className="input-field py-5 text-xl font-bold" onChange={(e) => updateSpecialized("accreditation", e.target.value)} />
+                        <input type="text" placeholder="e.g. NAAC A++, Tier 1" className="input-field py-5 text-xl font-bold" onChange={(e) => updateSpecialized("accreditation", e.target.value)} required />
                       </div>
                     </>
                   )}
@@ -169,7 +172,8 @@ export default function OrganizationOnboarding() {
                     <>
                       <div className="space-y-2">
                         <label className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Funding Stage</label>
-                        <select className="input-field py-5 text-xl font-bold appearance-none" onChange={(e) => updateSpecialized("funding", e.target.value)}>
+                        <select className="input-field py-5 text-xl font-bold appearance-none" onChange={(e) => updateSpecialized("funding", e.target.value)} required>
+                          <option value="">Select Stage</option>
                           <option>Bootstrapped</option>
                           <option>Pre-Seed</option>
                           <option>Seed</option>
@@ -177,7 +181,7 @@ export default function OrganizationOnboarding() {
                         </select>
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Innovation Sector</label>
+                        <label className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Innovation Sector <span className="text-[8px] opacity-50 ml-1">(Optional)</span></label>
                         <input type="text" placeholder="e.g. Fintech, AI, EdTech" className="input-field py-5 text-xl font-bold" onChange={(e) => updateSpecialized("sector", e.target.value)} />
                       </div>
                     </>
@@ -187,10 +191,10 @@ export default function OrganizationOnboarding() {
                     <>
                       <div className="space-y-2">
                         <label className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Industry Vertical</label>
-                        <input type="text" placeholder="e.g. Technology, Finance" className="input-field py-5 text-xl font-bold" onChange={(e) => updateSpecialized("industry", e.target.value)} />
+                        <input type="text" placeholder="e.g. Technology, Finance" className="input-field py-5 text-xl font-bold" onChange={(e) => updateSpecialized("industry", e.target.value)} required />
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Employee Scale</label>
+                        <label className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Employee Scale <span className="text-[8px] opacity-50 ml-1">(Optional)</span></label>
                         <select className="input-field py-5 text-xl font-bold appearance-none" onChange={(e) => updateSpecialized("scale", e.target.value)}>
                           <option>1-50 (Emerging)</option>
                           <option>50-500 (Mid-Market)</option>
@@ -208,20 +212,23 @@ export default function OrganizationOnboarding() {
               </motion.div>
             )}
 
-            {/* Step 4: Branding */}
+            {/* Step 4: Branding (Optional Skip) */}
             {step === 4 && (
               <motion.div key="step4" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-12">
-                <div>
-                  <h2 className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 mb-4">Aesthetics</h2>
-                  <h3 className="text-6xl font-black tracking-tighter">Narrative & <br /> <span className="text-sky-blue italic">Presence.</span></h3>
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h2 className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 mb-4">Aesthetics</h2>
+                    <h3 className="text-6xl font-black tracking-tighter">Narrative & <br /> <span className="text-sky-blue italic">Presence.</span></h3>
+                  </div>
+                  <button onClick={nextStep} className="text-[10px] font-black uppercase tracking-widest text-zinc-300 hover:text-sky-blue transition-colors pt-4">Skip for Now</button>
                 </div>
                 <div className="space-y-8">
                   <div className="flex flex-col items-center py-12 bg-zinc-50 rounded-[3rem] border-2 border-dashed border-zinc-100">
                     <Upload size={40} className="text-zinc-300 mb-4" />
-                    <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Upload Estate Crest (Logo)</p>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Upload Estate Crest (Optional)</p>
                   </div>
                   <textarea
-                    placeholder="Define the mission of your estate..."
+                    placeholder="Define the mission of your estate (Optional)..."
                     className="w-full text-2xl font-medium border-none focus:ring-0 placeholder:text-zinc-100 p-0 min-h-[150px] resize-none italic"
                     value={formData.bio}
                     onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
