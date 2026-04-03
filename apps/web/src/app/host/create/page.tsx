@@ -96,7 +96,7 @@ export default function CreateEventWizard() {
                       className={`p-8 rounded-3xl border-2 text-left transition-all hover:border-sky-blue group ${formData.category === cat.id ? "border-black bg-zinc-50" : "border-zinc-100"}`}
                     >
                       <div className="mb-4 text-zinc-400 group-hover:text-sky-blue transition-colors">
-                        {React.cloneElement(cat.icon as React.ReactElement, { size: 32 })}
+                        {cat.icon}
                       </div>
                       <span className="text-xl font-bold">{cat.label}</span>
                     </button>
@@ -174,7 +174,7 @@ export default function CreateEventWizard() {
                       onClick={() => toggleReward(reward.id)}
                       className={`p-8 rounded-[2rem] border-2 text-left transition-all group ${formData.rewards.includes(reward.id) ? "border-black bg-zinc-50 shadow-xl" : "border-zinc-100"}`}
                     >
-                      <div className="mb-6">{React.cloneElement(reward.icon as React.ReactElement, { size: 32 })}</div>
+                      <div className="mb-6">{reward.icon}</div>
                       <h4 className="text-xl font-bold mb-1 tracking-tight">{reward.label}</h4>
                       <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400">{reward.desc}</p>
                     </button>
