@@ -31,7 +31,7 @@ export default function ExploreFeed() {
     { id: "cultural", label: "Cultural", icon: <Music size={16} /> },
   ];
 
-  const events = [
+  const [events, setEvents] = useState([
     {
       id: 1,
       title: "National Math Olympiad",
@@ -56,7 +56,35 @@ export default function ExploreFeed() {
       image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop",
       type: "discovery"
     }
-  ];
+  ]);
+
+  React.useEffect(() => {
+    // Automatically sync and fetch global events from the last 24 hours
+    const syncGlobalEvents = async () => {
+      try {
+        const res = await fetch('/api/cron/sync-events');
+        if (res.ok) {
+          const data = await res.json();
+          if (data.events) {
+            const syncedEvents = data.events.map((e: any, index: number) => ({
+              id: events.length + index + 1,
+              ...e
+            }));
+            setEvents(prev => {
+              // Prevent duplicates (simple check by title)
+              const existingTitles = prev.map(p => p.title);
+              const newEvents = syncedEvents.filter((e: any) => !existingTitles.includes(e.title));
+              return [...prev, ...newEvents];
+            });
+          }
+        }
+      } catch (error) {
+        console.error("Failed to sync global events", error);
+      }
+    };
+    
+    syncGlobalEvents();
+  }, []);
 
   const filteredEvents = activeTab === "all" ? events : events.filter(e => e.category === activeTab);
 
