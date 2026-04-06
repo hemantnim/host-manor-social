@@ -66,14 +66,14 @@ export default function ExploreFeed() {
         if (res.ok) {
           const data = await res.json();
           if (data.events) {
-            const syncedEvents = data.events.map((e: any, index: number) => ({
+            const syncedEvents = data.events.map((e: { title: string, host: string, category: string, date: string, mode: string, location: string, participants: number, image: string, type: string }, index: number) => ({
               id: events.length + index + 1,
               ...e
             }));
             setEvents(prev => {
               // Prevent duplicates (simple check by title)
               const existingTitles = prev.map(p => p.title);
-              const newEvents = syncedEvents.filter((e: any) => !existingTitles.includes(e.title));
+              const newEvents = syncedEvents.filter((e: { title: string }) => !existingTitles.includes(e.title));
               return [...prev, ...newEvents];
             });
           }
